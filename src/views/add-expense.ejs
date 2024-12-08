@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Expense</title>
+  </head>
+  <body>
+    <h1>Add a New Expense</h1>
+    <form action="/add-expense" method="POST">
+      <label for="userId">User ID:</label>
+      <input type="text" id="userId" name="userId" required /><br />
+
+      <label for="beschrijving">Description:</label>
+      <input type="text" id="beschrijving" name="beschrijving" required /><br />
+
+      <label for="bedrag">Amount:</label>
+      <input type="text" id="bedrag" name="bedrag" required /><br />
+
+      <label for="datum">Date:</label>
+      <input type="date" id="datum" name="datum" required /><br />
+
+      <label for="valuta">Currency:</label>
+      <input type="text" id="valuta" name="valuta" required /><br />
+
+      <label for="betaalmethode">Payment Method:</label>
+      <input
+        type="text"
+        id="betaalmethode"
+        name="betaalmethode"
+        required
+      /><br />
+
+      <label for="categorie">Category:</label>
+      <input type="text" id="categorie" name="categorie" required /><br />
+
+      <label for="tags">Tags (comma separated):</label>
+      <input type="text" id="tags" name="tags" required /><br />
+
+      <label for="betaald">Paid (true/false):</label>
+      <input type="text" id="betaald" name="betaald" required /><br />
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <a href="/">Back to Expenses</a>
+  </body>
+</html>

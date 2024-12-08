@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Expense</title>
+  </head>
+  <body>
+    <h1>Edit Expense</h1>
+    <form action="/edit-expense/<%= expense._id %>" method="POST">
+      <label for="beschrijving">Description:</label>
+      <input
+        type="text"
+        id="beschrijving"
+        name="beschrijving"
+        value="<%= expense.beschrijving %>"
+        required
+      /><br /><br />
+
+      <label for="bedrag">Amount:</label>
+      <input
+        type="number"
+        id="bedrag"
+        name="bedrag"
+        value="<%= expense.bedrag %>"
+        required
+      /><br /><br />
+
+      <label for="datum">Date:</label>
+      <input
+        type="datetime-local"
+        id="datum"
+        name="datum"
+        value="<%= expense.datum.toISOString().slice(0, 16) %>"
+        required
+      /><br /><br />
+
+      <label for="valuta">Currency:</label>
+      <input
+        type="text"
+        id="valuta"
+        name="valuta"
+        value="<%= expense.valuta %>"
+        required
+      /><br /><br />
+
+      <label for="betaalmethode">Payment Method:</label>
+      <input
+        type="text"
+        id="betaalmethode"
+        name="betaalmethode"
+        value="<%= expense.betaalmethode %>"
+        required
+      /><br /><br />
+
+      <label for="categorie">Category:</label>
+      <input
+        type="text"
+        id="categorie"
+        name="categorie"
+        value="<%= expense.categorie %>"
+        required
+      /><br /><br />
+
+      <label for="tags">Tags (comma separated):</label>
+      <input
+        type="text"
+        id="tags"
+        name="tags"
+        value="<%= expense.tags.join(', ') %>"
+        required
+      /><br /><br />
+
+      <label for="betaald">Paid:</label>
+      <input type="checkbox" id="betaald" name="betaald" <%= expense.betaald ?
+      'checked' : '' %>><br /><br />
+
+      <button type="submit">Update Expense</button>
+    </form>
+    <a href="/">Back to Expenses</a>
+  </body>
+</html>

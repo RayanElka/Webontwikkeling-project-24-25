@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "naam": "Jan",
+    "uitgaven": [
+      {
+        "id": 3543,
+        "beschrijving": "qppel",
+        "bedrag": 11.06,
+        "datum": "2024-11-03T15:23:01.699Z",
+        "valuta": "euro",
+        "betaalmethode": {
+          "methode": "bank"
+        },
+        "categorie": "food",
+        "tags": ["fruiut"],
+        "betaald": true
+      },
+      {
+        "id": 2100,
+        "beschrijving": "Booodschappen ",
+        "bedrag": 150.69,
+        "datum": "2024-11-03T15:37:23.148Z",
+        "valuta": "euro",
+        "betaalmethode": {
+          "methode": "bank"
+        },
+        "categorie": "food",
+        "tags": ["fruiut"],
+        "betaald": true
+      },
+      {
+        "id": 6145,
+        "beschrijving": "Booodschappen ",
+        "bedrag": 12.33,
+        "datum": "2024-12-08T12:05:23.384Z",
+        "valuta": "euro",
+        "betaalmethode": {
+          "methode": "bank"
+        },
+        "categorie": "Elektronica",
+        "tags": ["TV"],
+        "betaald": true
+      }
+    ],
+    "inkomen": []
+  },
+  {
+    "id": 2,
+    "naam": "Rayan",
+    "uitgaven": [],
+    "inkomen": []
+  }
+]

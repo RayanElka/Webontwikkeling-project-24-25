@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Manager</title>
+    <link rel="stylesheet" href="/style/style.css" />
+  </head>
+  <body>
+    <h1>Expense Manager</h1>
+
+    <!-- Link to add new expense -->
+    <a href="/add-expense">Add New Expense</a>
+
+    <h2>Expenses</h2>
+
+    <% if (expenses && expenses.length > 0) { %>
+    <ul>
+      <% expenses.forEach(expense => { %>
+      <li>
+        <strong><%= expense.beschrijving %></strong><br />
+        Amount: <%= expense.bedrag %> <%= expense.valuta %><br />
+        Date: <%= expense.datum.toLocaleString() %><br />
+        Category: <%= expense.categorie %><br />
+        Tags: <%= expense.tags.join(', ') %><br />
+        Payment Method: <%= expense.betaalmethode.methode %><br />
+        Paid: <%= expense.betaald ? 'Yes' : 'No' %><br />
+
+        <!-- Edit Link -->
+        <a href="/edit-expense/<%= expense._id %>">Edit</a>
+
+        <!-- Delete Form -->
+        <form
+          action="/delete-expense/<%= expense._id %>"
+          method="POST"
+          style="display: inline"
+        >
+          <button type="submit">Delete</button>
+        </form>
+      </li>
+      <% }) %>
+    </ul>
+    <% } else { %>
+    <p>No expenses found.</p>
+    <% } %>
+
+    <h2>Users</h2>
+    <% if (users && users.length > 0) { %>
+    <ul>
+      <% users.forEach(function(user) { %>
+      <li><%= user.name %> - <%= user.email %></li>
+      <% }); %>
+    </ul>
+    <% } else { %>
+    <p>No users found.</p>
+    <% } %>
+  </body>
+</html>

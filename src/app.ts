@@ -2,18 +2,13 @@ import express, { Request, Response } from "express";
 import path from "path";
 import { MongoClient, ObjectId } from "mongodb";
 
-// Initialize Express
 const app = express();
 const port = 3000;
 
-app.use(express.static(path.join(__dirname, "public")));
-
-// MongoDB connectie-instellingen
 const url = "mongodb+srv://Rayan:s131022@webontwikkeling.s378ort.mongodb.net/";
 const dbName = "expense-manager";
 let db: any;
 
-// Verbind met MongoDB
 const connectToDatabase = async () => {
   try {
     const client = await MongoClient.connect(url);
@@ -24,19 +19,13 @@ const connectToDatabase = async () => {
   }
 };
 
-// Set up view engine to use EJS
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+app.use(express.static(path.join(__dirname, "../public")));
 
-// Middleware to parse incoming request body
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Serve static files (for CSS, JS, etc.)
-app.use(express.static(path.join(__dirname, "public")));
-
-// Route: Homepagina
-// Route: Homepagina
 app.get("/", async (req: Request, res: Response) => {
   try {
     const users = await db.collection("users").find().toArray();
@@ -48,12 +37,10 @@ app.get("/", async (req: Request, res: Response) => {
   }
 });
 
-// Route: Kosten toevoegen (formulier voor uitgaven)
 app.get("/add-expense", (req: Request, res: Response) => {
   res.render("add-expense");
 });
 
-// Route: Verwerk de toevoeging van een nieuwe uitgave
 app.post("/add-expense", async (req: Request, res: Response) => {
   const {
     userId,
@@ -72,11 +59,11 @@ app.post("/add-expense", async (req: Request, res: Response) => {
     bedrag: parseFloat(bedrag),
     datum: new Date(datum),
     valuta,
-    betaalmethode, // direct gebruiken zonder JSON.parse()
+    betaalmethode,
     categorie,
-    tags: tags.split(","), // tags omzetten naar array
-    betaald: betaald === "true", // zorg ervoor dat "true" een boolean wordt
-    userId: userId, // Voeg userId toe aan de uitgave
+    tags: tags.split(","),
+    betaald: betaald === "true",
+    userId: userId,
   };
 
   try {
@@ -88,7 +75,6 @@ app.post("/add-expense", async (req: Request, res: Response) => {
   }
 });
 
-// Route: Bewerk een uitgave (toon formulier)
 app.get("/edit-expense/:id", async (req: Request, res: Response) => {
   const expenseId = req.params.id;
   try {
@@ -105,7 +91,6 @@ app.get("/edit-expense/:id", async (req: Request, res: Response) => {
   }
 });
 
-// Route: Verwerk bewerkte uitgave
 app.post("/edit-expense/:id", async (req: Request, res: Response) => {
   const expenseId = req.params.id;
   const {
@@ -119,29 +104,25 @@ app.post("/edit-expense/:id", async (req: Request, res: Response) => {
     betaald,
   } = req.body;
 
-  // Maak het object voor de bewerkte uitgave
   const updatedExpense = {
     beschrijving,
     bedrag: parseFloat(bedrag),
     datum: new Date(datum),
     valuta,
-    betaalmethode, // direct gebruiken zonder JSON.parse()
+    betaalmethode,
     categorie,
-    tags: tags.split(","), // tags omzetten naar array
-    betaald: betaald === "true", // zorg ervoor dat "true" een boolean wordt
+    tags: tags.split(","),
+    betaald: betaald === "true",
   };
 
   try {
-    // Werk de uitgave bij in de database
     const result = await db
       .collection("expenses")
       .updateOne({ _id: new ObjectId(expenseId) }, { $set: updatedExpense });
 
-    // Als er geen wijzigingen zijn, stuur een foutmelding
     if (result.modifiedCount === 0) {
       return res.status(404).send("Expense not found or no changes made");
     }
-    // Redirect naar de hoofdpagina na succesvolle update
     res.redirect("/");
   } catch (err) {
     console.error("Error editing expense", err);
@@ -149,7 +130,6 @@ app.post("/edit-expense/:id", async (req: Request, res: Response) => {
   }
 });
 
-// Start de server
 const startServer = async () => {
   await connectToDatabase();
 

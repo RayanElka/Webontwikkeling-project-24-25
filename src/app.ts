@@ -7,8 +7,7 @@ const app = express();
 const port = 3000;
 
 app.use(express.static(path.join(__dirname, "public")));
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
+
 // MongoDB connectie-instellingen
 const url = "mongodb+srv://Rayan:s131022@webontwikkeling.s378ort.mongodb.net/";
 const dbName = "expense-manager";

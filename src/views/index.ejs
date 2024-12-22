@@ -7,52 +7,103 @@
     <link rel="stylesheet" href="/style/style.css" />
   </head>
   <body>
-    <h1>Expense Manager</h1>
+    <nav>
+      <h1>Expense Manager</h1>
+      <form action="/logout" method="get">
+        <button type="submit">Logout</button>
+      </form>
+    </nav>
+    <% if (message) { %>
+    <p style="color: green"><%= message %></p>
+    <% } %>
 
-    <!-- Link to add new expense -->
-    <a href="/add-expense">Add New Expense</a>
+    <form action="/search" method="GET" style="margin-bottom: 20px">
+      <label for="query">Zoekterm:</label>
+      <input type="text" name="query" id="query" placeholder="Beschrijving" />
 
-    <h2>Expenses</h2>
+      <label for="categorie">Categorie:</label>
+      <input
+        type="text"
+        name="categorie"
+        id="categorie"
+        placeholder="Categorie"
+      />
+
+      <label for="minBedrag">Min Bedrag:</label>
+      <input type="number" name="minBedrag" id="minBedrag" step="0.01" />
+
+      <label for="maxBedrag">Max Bedrag:</label>
+      <input type="number" name="maxBedrag" id="maxBedrag" step="0.01" />
+
+      <label for="betaald">Betaald:</label>
+      <select name="betaald" id="betaald">
+        <option value="">Alle</option>
+        <option value="true">Ja</option>
+        <option value="false">Nee</option>
+      </select>
+      <button type="submit">Zoeken</button>
+    </form>
+
+    <h2>Alle Uitgaven</h2>
+    <button id="Toevoegen">
+      <a href="/add-expense">Nieuwe Uitgave Toevoegen</a>
+    </button>
 
     <% if (expenses && expenses.length > 0) { %>
     <ul>
       <% expenses.forEach(expense => { %>
       <li>
         <strong><%= expense.beschrijving %></strong><br />
-        Amount: <%= expense.bedrag %> <%= expense.valuta %><br />
-        Date: <%= expense.datum.toLocaleString() %><br />
-        Category: <%= expense.categorie %><br />
-        Tags: <%= expense.tags.join(', ') %><br />
-        Payment Method: <%= expense.betaalmethode.methode %><br />
-        Paid: <%= expense.betaald ? 'Yes' : 'No' %><br />
-
-        <!-- Edit Link -->
-        <a href="/edit-expense/<%= expense._id %>">Edit</a>
-
-        <!-- Delete Form -->
+        Bedrag: <%= expense.bedrag %> <%= expense.valuta %><br />
+        Datum: <%= expense.datum ? expense.datum.toISOString().slice(0, 10) :
+        'N/A' %>
+        <br />
+        Categorie: <%= expense.categorie %><br />
+        Tags: <%= expense.tags.join(", ") %><br />
+        Betaalmethode: <%= expense.betaalmethode ? expense.betaalmethode : 'N/A'
+        %> <br />Betaald: <%= expense.betaald ? "Ja" : "Nee" %><br />
+        <a href="/edit-expense/<%= expense._id %>">Bewerken</a>
         <form
           action="/delete-expense/<%= expense._id %>"
           method="POST"
           style="display: inline"
         >
-          <button type="submit">Delete</button>
+          <button type="submit">Verwijderen</button>
         </form>
       </li>
       <% }) %>
     </ul>
     <% } else { %>
-    <p>No expenses found.</p>
+    <p>Geen uitgaven gevonden.</p>
     <% } %>
 
-    <h2>Users</h2>
-    <% if (users && users.length > 0) { %>
+    <h2>Inkomsten</h2>
+    <button id="Toevoegen">
+      <a href="/add-income">Nieuw Inkomen Toevoegen</a>
+    </button>
+
+    <% if (income && income.length > 0) { %>
     <ul>
-      <% users.forEach(function(user) { %>
-      <li><%= user.name %> - <%= user.email %></li>
-      <% }); %>
+      <% income.forEach(item => { %>
+      <li>
+        <strong><%= item.beschrijving %></strong><br />
+        Bedrag: <%= item.bedrag %> <%= item.valuta %><br />
+        Datum: <%= item.datum.toISOString().slice(0, 10) %><br />
+        Categorie: <%= item.categorie %><br />
+        <a href="/edit-income/<%= item._id %>">Bewerken</a>
+
+        <form
+          action="/delete-income/<%= item._id %>"
+          method="POST"
+          style="display: inline"
+        >
+          <button type="submit">Verwijderen</button>
+        </form>
+      </li>
+      <% }) %>
     </ul>
     <% } else { %>
-    <p>No users found.</p>
+    <p>Geen inkomsten gevonden.</p>
     <% } %>
   </body>
 </html>

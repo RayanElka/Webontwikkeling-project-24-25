@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/style/style.css" />
+  </head>
+  <body>
+    <!-- Filtered Results Section -->
+    <h2>Filter Resultaten: Uitgaven</h2>
+    <% if (expenses && expenses.length > 0) { %>
+    <ul>
+      <% expenses.forEach(expense => { %>
+      <li>
+        <strong><%= expense.beschrijving %></strong><br />
+        Bedrag: <%= expense.bedrag %> <%= expense.valuta %><br />
+        Datum: <%= expense.datum.toISOString().slice(0, 10) %><br />
+        Categorie: <%= expense.categorie %><br />
+        Betaald: <%= expense.betaald ? "Ja" : "Nee" %><br />
+      </li>
+      <% }) %>
+    </ul>
+    <% } else { %>
+    <p>Geen uitgaven gevonden.</p>
+    <% } %>
+
+    <h2>Filter Resultaten: Inkomsten</h2>
+    <% if (income && income.length > 0) { %>
+    <ul>
+      <% income.forEach(item => { %>
+      <li>
+        <strong><%= item.beschrijving %></strong><br />
+        Bedrag: <%= item.bedrag %> <%= item.valuta %><br />
+        Datum: <%= item.datum.toISOString().slice(0, 10) %><br />
+        Categorie: <%= item.categorie %><br />
+      </li>
+      <% }) %>
+    </ul>
+    <% } else { %>
+    <p>Geen inkomsten gevonden.</p>
+    <% } %>
+  </body>
+</html>

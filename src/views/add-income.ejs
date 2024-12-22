@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Inkomen Toevoegen</title>
+    <link rel="stylesheet" href="/style/style.css" />
+  </head>
+  <body>
+    <h1>Nieuw Inkomen Toevoegen</h1>
+
+    <% if (message) { %>
+    <p style="color: green"><%= message %></p>
+    <% } %>
+
+    <form action="/add-income" method="POST">
+      <label for="beschrijving">Beschrijving:</label>
+      <input type="text" name="beschrijving" id="beschrijving" required />
+
+      <label for="bedrag">Bedrag:</label>
+      <input type="number" name="bedrag" id="bedrag" step="0.01" required />
+
+      <label for="datum">Datum:</label>
+      <input type="date" name="datum" id="datum" required />
+
+      <label for="valuta">Valuta:</label>
+      <input
+        type="text"
+        name="valuta"
+        id="valuta"
+        placeholder="EUR, USD, etc."
+      />
+
+      <label for="categorie">Categorie:</label>
+      <input type="text" name="categorie" id="categorie" />
+
+      <button type="submit">Toevoegen</button>
+    </form>
+
+    <a href="/incomes">Terug naar inkomsten</a>
+  </body>
+</html>

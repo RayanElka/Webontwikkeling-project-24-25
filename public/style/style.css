@@ -10,7 +10,12 @@ h1,
 h2 {
   color: #333;
 }
-
+nav {
+  gap: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 a {
   color: #007bff;
   text-decoration: none;
@@ -18,19 +23,6 @@ a {
 
 a:hover {
   text-decoration: underline;
-}
-
-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 8px 15px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-button:hover {
-  background-color: #0056b3;
 }
 
 /* Container voor de inhoud */
@@ -74,10 +66,20 @@ form textarea {
 form button {
   width: 100%;
   padding: 12px;
-  background-color: #28a745;
+  background-color: #007bff;
   border-radius: 5px;
+  cursor: pointer;
 }
-
+#Toevoegen {
+  width: 11%;
+  padding: 12px;
+  background-color: greenyellow;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#Toevoegen a {
+  text-decoration: none;
+}
 form button:hover {
   background-color: #218838;
 }
@@ -105,4 +107,15 @@ h2 {
 
 .delete-btn:hover {
   background-color: darkred;
+}
+
+.feedback {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #c3e6cb;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+  text-align: center;
 }

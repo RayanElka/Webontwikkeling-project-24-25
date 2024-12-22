@@ -4,13 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Expense</title>
+    <link rel="stylesheet" href="/style/style.css" />
   </head>
   <body>
     <h1>Add a New Expense</h1>
     <form action="/add-expense" method="POST">
-      <label for="userId">User ID:</label>
-      <input type="text" id="userId" name="userId" required /><br />
-
       <label for="beschrijving">Description:</label>
       <input type="text" id="beschrijving" name="beschrijving" required /><br />
 
@@ -24,12 +22,14 @@
       <input type="text" id="valuta" name="valuta" required /><br />
 
       <label for="betaalmethode">Payment Method:</label>
-      <input
-        type="text"
-        id="betaalmethode"
-        name="betaalmethode"
-        required
-      /><br />
+      <select id="betaalmethode" name="betaalmethode" required>
+        <option value="" disabled selected>
+          -- Selecteer Betaalmethode --
+        </option>
+        <option value="contant">Contant</option>
+        <option value="bank">Bank</option>
+        <option value="credit">Credit</option></select
+      ><br />
 
       <label for="categorie">Category:</label>
       <input type="text" id="categorie" name="categorie" required /><br />

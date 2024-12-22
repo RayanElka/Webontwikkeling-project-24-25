@@ -1,22 +1,33 @@
 import { ObjectId } from "mongodb";
 
-export interface Expense {
-  description: string;
-  amount: number;
-  currency: string;
-  category: string;
-  tags: string[];
-  date: Date;
-}
-
-export interface User {
-  _id: ObjectId;
-  name: string;
-  email: string;
-  expenses: Expense[];
+export const userModel = {
+  id: Number,
+  name: String,
+  email: String,
+  expenses: [
+    {
+      id: Number,
+      description: String,
+      amount: Number,
+      date: Date,
+      currency: String,
+      paymentMethod: {
+        method: String,
+        cardDetails: {
+          cardNumber: String,
+          expiryDate: String,
+        },
+        bankAccountNumber: String,
+      },
+      isIncoming: Boolean,
+      category: String,
+      tags: [String],
+      isPaid: Boolean,
+    },
+  ],
   budget: {
-    monthlyLimit: number;
-    notificationThreshold: number;
-    isActive: boolean;
-  };
-}
+    monthlyLimit: Number,
+    notificationThreshold: Number,
+    isActive: Boolean,
+  },
+};

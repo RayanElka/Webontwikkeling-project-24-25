@@ -3,19 +3,19 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const uri = process.env.MONGO_URI || ""; // Zorg ervoor dat .env het bevat
-const client = new MongoClient(uri);
 let db: Db;
 
 // Verbind met MongoDB
 export const connectToDatabase = async () => {
+  const uri = process.env.MONGO_URI;
   if (!uri) {
     throw new Error("Geen MONGO_URI gevonden in .env bestand");
   }
 
+  const client = new MongoClient(uri);
   try {
     await client.connect();
-    db = client.db("expensesApp"); // Vervang met je database naam
+    db = client.db("expensesApp");
     console.log("Verbonden met MongoDB");
   } catch (err) {
     console.error("Fout bij verbinden met MongoDB:", err);

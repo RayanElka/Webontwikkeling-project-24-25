@@ -13,7 +13,10 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
-const secretKey: string = process.env.JWT_SECRET || "default_secret";
+const secretKey = process.env.JWT_SECRET;
+if (!secretKey?.trim()) {
+  throw new Error("Set JWT_SECRET before starting the application.");
+}
 
 // Extend Request to include user
 interface JwtPayload {
